@@ -1,0 +1,48 @@
+name: Generate Tweets JSON
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout data
+        uses: actions/checkout@v2
+
+      - name: Checkout cmd
+        uses: actions/checkout@v2
+        with:
+          repository: uakihir0/gallery-cmd
+          ref: main
+          path: cmd
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+          with:
+            distribution: 'corretto'
+            java-version: '11'
+
+      - name: Move json
+        run: |
+          mv ./app/work/gallery.json ./gallery.json
+
+      - name: Exec cmd
+        run: |
+          cd ./app && ./gradlew bootRun
+
+      - name: Move json
+        run: |
+          mv ./app/work/gallery.json ./gallery.json
+
+      - name: Push
+        run: |
+          git config --global user.email "a.urusihara@gmail.com"
+          git config --global user.name "Akihiro Urushihara"
+          git add gallery.json
+          git commit -m "by GitHub Action CI (SHA ${GITHUB_SHA})"
+          git push origin main
