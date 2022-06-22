@@ -29,15 +29,15 @@ jobs:
 
       - name: Move json
         run: |
-          cp ./gallery.json ./app/work/gallery.json
+          cp ./gallery.json ./cmd/work/gallery.json
 
       - name: Exec cmd
         run: |
-          cd ./app && ./gradlew bootRun
+          cd ./cmd && ./gradlew bootRun
 
       - name: Move json
         run: |
-          cp ./app/work/gallery.json ./gallery.json
+          cp ./cmd/work/gallery.json ./gallery.json
 
       - name: Push
         run: |
