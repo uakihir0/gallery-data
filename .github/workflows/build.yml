@@ -29,7 +29,7 @@ jobs:
 
       - name: Move json
         run: |
-          mv ./app/work/gallery.json ./gallery.json
+          cp ./gallery.json ./app/work/gallery.json
 
       - name: Exec cmd
         run: |
@@ -37,7 +37,7 @@ jobs:
 
       - name: Move json
         run: |
-          mv ./app/work/gallery.json ./gallery.json
+          cp ./app/work/gallery.json ./gallery.json
 
       - name: Push
         run: |
