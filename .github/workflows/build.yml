@@ -41,8 +41,8 @@ jobs:
 
       - name: Push
         run: |
-          git config --global user.email "a.urusihara@gmail.com"
-          git config --global user.name "Akihiro Urushihara"
+          git config --global user.email "bot.a.urusihara@gmail.com"
+          git config --global user.name "Akihiro Urushihara (bot)"
           git add gallery.json
           git commit -m "by GitHub Action CI (SHA ${GITHUB_SHA})"
           git push origin main
