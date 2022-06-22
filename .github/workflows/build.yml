@@ -3,7 +3,7 @@ name: Generate Tweets JSON
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
