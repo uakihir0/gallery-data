@@ -29,6 +29,20 @@ jobs:
           distribution: "corretto"
           java-version: "11"
 
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.9"
+
+      - name: Install TensorFlow
+        run: |
+          sudo apt-get install libpq-dev python-dev
+          python -m pip install --upgrade pip
+          pip install tensorflow
+          pip install numpy
+          pip install keras
+          pip install Pillow
+
       - name: Move json
         run: |
           cp ./gallery.json ./cmd/work/gallery.json
