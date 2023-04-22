@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "5 */1 * * *"
+    - cron: "5 0-15/3 * * *"
 
 jobs:
   deploy:
@@ -54,10 +54,16 @@ jobs:
         run: |
           cp ./cmd/work/gallery.json ./gallery.json
 
+      - name: Change Cron Schedule
+        run: |
+          sed -i -e "5s|.*|    - cron: '$(($RANDOM % 60)) 0-15/3 * * *'|g" ./.github/workflows/build.yml
+          rm -f ./.github/workflows/*.yml-e
+
       - name: Push
         run: |
           git config --global user.email "bot.a.urusihara@gmail.com"
           git config --global user.name "Akihiro Urushihara (bot)"
           git add gallery.json
+          git add .github/workflows/build.yml
           git commit -m "by GitHub Action CI (SHA ${GITHUB_SHA})"
           git push origin main
