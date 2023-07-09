@@ -1,9 +1,7 @@
 name: Generate Tweets JSON
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
   schedule:
     - cron: "5 0-15/3 * * *"
 
